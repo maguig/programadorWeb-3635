@@ -1,0 +1,40 @@
+section.comprar {
+	padding: 50px 0;
+	background: rgb(69, 127, 188);
+	height: 100vh;
+}
+
+section.comprar h2 {
+	color: #fff;
+}
+
+section.comprar .contenedor {
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+}
+
+section.comprar form {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+
+section.comprar form input,
+section.comprar form textarea {
+	display: inline-block;
+	margin-bottom: 10px;
+	padding: 8px 10px;
+	border: none;
+	outline: none;
+	resize: none;
+}
+
+section.comprar form input.enviar {
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 1px;
+    font-size: 1rem;
+}
