@@ -1,8 +1,10 @@
 // Le pido al usuario que ingrese un día de la semana
 var dayOfTheWeek = prompt('Ingrese día de la semana', 'Lunes')
 
+// Creo una variable para guardar el mensaje según el caso elegido por el usuario
 var message
 
+// Comparo el día ingresado por el usuario con todos los casos posibles
 switch (dayOfTheWeek) {
   case 'Lunes':
   case 'Martes':
@@ -20,4 +22,5 @@ switch (dayOfTheWeek) {
     break
 }
 
+// Muestro en consola el mensaje según el caso en el coincidió
 console.log(message)
