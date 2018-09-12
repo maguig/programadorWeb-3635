@@ -1,11 +1,20 @@
+var firstNameNode = document.getElementById('firstName')
 
 
-var FirstName = document.getElementById('FirstName ')
+function validateFirstName (event) {
+  var inputNode = event.target;
 
-FirstName.onblur = validateFirstName
+  var value = inputNode.value;
 
-function validateFirstName(event){
-  var inputNode =  event.target
+  if (value == '') {
+    inputNode.classList.add('is-invalid');
+    inputNode.classList.remove('is-valid');
+  } else {
+    inputNode.classList.add('is-valid');
+    inputNode.classList.remove('is-invalid');
 
-  console.log('El usuario perdió foco y el input tiene el valor ' + inputNode.value)
+  }
 }
+
+firstNameNode.onblur = validateFirstName;
+
