@@ -1,19 +1,19 @@
-var inputEmail = document.getElementById('input-email')
+var emailNode = document.getElementById('email')
 
-inputText.onblur = showMessage
+emailNode.oninput = validateEmail
 
-function showMessage(){
-  console.log('El usuario perdió foco')
+function validateEmail (event) {
+  var inputNode = event.target
+
+  var value = inputNode.value
+
+  var regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+
+  if (!regexPassword.test(value)) {
+    inputNode.classList.add('is-invalid')
+    inputNode.classList.remove('is-valid')
+  } else {
+    inputNode.classList.add('is-valid')
+    inputNode.classList.remove('is-invalid')
+  }
 }
-
-//function showMessage (event) {
-//   var emailNode = document.getElementById('email')
-
-//   var value = emailNode.value
-
-//   // if (value.length < 5) {
-//   //   console.log('Email muy corto')
-//   // } else {
-//   //   console.log('Email correcto')
-//   // }
-// }
