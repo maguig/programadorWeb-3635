@@ -25,37 +25,37 @@ console.log('Init app')
 
 // boolean
 
-var planeMode
+// var planeMode
 
-planeMode = true
+// planeMode = true
 
-planeMode = false
+// planeMode = false
 
 // string
 
-var name = 'Jauncito'
+//var name = 'Jauncito'
 
 // number
 
-var age = 29
+//var age = 29
 
 // undefined
 
-var noAssignation = undefined
+//var noAssignation = undefined
 
 // null
 
-var nullValue = null
+//var nullValue = null
 
 // Valores estructurados
 
 // Array
 
-// var colors = [ 'red', 'blue', 'yellow', false, undefined, null ]
+ var colors = [ 'red', 'blue', 'yellow', false, undefined, null ]
 
-// console.log(colors[2])
+ console.log(colors[2])
 
-// colors[2] = 'green'
+//colors[2] = 'green'
 
 // console.log(colors[2])
 
@@ -135,8 +135,8 @@ var nullValue = null
 
 // console.log(div)
 
-var age = prompt('Ingresá tu edad')
+// var age = prompt('Ingresá tu edad')
 
-var parsedAge = parseFloat(age, 10)
+// var parsedAge = parseFloat(age, 10)
 
-console.log(parsedAge - 2)
+// console.log(parsedAge - 2)
