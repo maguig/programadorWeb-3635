@@ -24,9 +24,9 @@ var students = [
 /**
  * deleteElement hace una copia de primer nivel del Array y elimina el elemento
  * en la posición indicada
- * @param {number} index
- * @param {Array} elements
- * @returns {Array}
+  @param {number} index
+  @param {Array} elements
+  @returns {Array}
  */
 function deleteElement (index, elements) {
   if (Array.isArray(elements)) {

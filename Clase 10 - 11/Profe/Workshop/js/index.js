@@ -1,16 +1,16 @@
-console.log('Init app')
+console.log('Init app');
 
 // Globales
 
-var LOCAL_KEY = 'studentList'
+var LOCAL_KEY = 'studentList';
 
 // Carga inicial
 
-var studentsList = getLocalList(LOCAL_KEY)
+var studentsList = getLocalList(LOCAL_KEY);
 
-var mainListNode = document.getElementById('mainList')
+var mainListNode = document.getElementById('mainList');
 
-var student
+var student;
 
 for (var i = 0; i < studentsList.length; i++) {
   student = createStudentNode(studentsList[i])
@@ -20,17 +20,17 @@ for (var i = 0; i < studentsList.length; i++) {
 
 // Validar los campos nombre y dni
 
-var firstNameNode = document.getElementById('firstName')
+var firstNameNode = document.getElementById('firstName');
 
 firstNameNode.onblur = validateRequiredField
 
-var dniNode = document.getElementById('dni')
+var dniNode = document.getElementById('dni');
 
 dniNode.onblur = validateDniField
 
 // Agregar el estudiante
 
-var addStudentButtonNode = document.getElementById('addStudentButton')
+var addStudentButtonNode = document.getElementById('addStudentButton');
 
 addStudentButtonNode.onclick = addStudent
 
@@ -105,13 +105,13 @@ function validateRequiredField (event) {
 }
 
 function validateSubmitButton () {
-  var addStudentButtonNode = document.getElementById('addStudentButton')
-  var inputFields = document.getElementsByClassName('is-valid')
+  var addStudentButtonNode = document.getElementById('addStudentButton');
+  var inputFields = document.getElementsByClassName('is-invalid');
 
-  if (inputFields.length === 2) {
-    addStudentButtonNode.disabled = false
+  if (inputFields.length > 0) {
+    addStudentButtonNode.disabled = true;
   } else {
-    addStudentButtonNode.disabled = true
+    addStudentButtonNode.disabled = false;
   }
 }
 
@@ -166,4 +166,7 @@ function getLocalList (key) {
       return []
     }
   }
+  
+
 }
+
