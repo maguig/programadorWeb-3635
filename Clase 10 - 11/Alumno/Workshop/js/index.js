@@ -33,6 +33,63 @@ var addStudentButtonNode = document.getElementById('addStudentButton');
 
 addStudentButtonNode.onclick = addStudent
 
+
+var deleteDniNode = document.getElementById('deleteDni')
+
+deleteDniNode.oninput = validateDeleteDniField
+
+var deleteStudentButtonNode = document.getElementById('deleteStudentButton')
+
+deleteStudentButtonNode.onclick = deleteStudent
+
+
+var searchStudentButtonNode = document.getElementById('searchStudentButton')
+
+searchStudentButtonNode.onclick =  searchStudent
+
+function serchStudent(event) {
+  var searchTextNode = document.getElementById('searchText')
+}
+//falta terminar la busqueda
+
+function validateDeleteDniField (event) {
+  var inputNode = event.target
+
+  var index = searchStudentIndexByDni(inputNode.value, studentsList)
+
+  console.log(index)
+  if (index > -1) {
+    // Habilitamos el botón
+    deleteStudentButtonNode.disabled = false
+  } else {
+    // Deshabilitar el botón
+    deleteStudentButtonNode.disabled = true
+  }
+}
+
+function deleteStudent () {
+  var deleteDniValue = deleteDniNode.value
+
+  var index = searchStudentIndexByDni(deleteDniValue, studentsList)
+
+  // Elimino en la fuente de verdad
+  studentsList.splice(index, 1)
+
+  // Piso la lista del localStorage
+  setLocalList(LOCAL_KEY, studentsList)
+
+  // Busco en el dom el nodo y lo elimino de la lista
+  var node = document.getElementById(deleteDniValue)
+
+  mainListNode.removeChild(node)
+
+  deleteDniNode.value = ''
+  deleteStudentButtonNode.disabled = true
+
+  console.log(studentsList)
+}
+
+
 function addStudent () {
   var firstNameValue = firstNameNode.value
   var dniValue = dniNode.value
@@ -168,3 +225,35 @@ function getLocalList (key) {
   
 }
 
+
+function searchStudentIndexByText (text, studentsList) {
+  var student
+
+  for (var i = 0; i < studentsList.length; i++) {
+    student = studentsList[i]
+    if (
+      includesText(text, student.firstName) ||
+      includesText(text, student.lastName)
+    ) {
+      return i
+    }
+  }
+
+  return -1
+}
+
+function includesText (text, baseText) {
+  // Valido que ambos parámetros sean string
+  if (typeof text === 'string' && typeof baseText === 'string') {
+    // Verifico si el primer parámetro se encuentra dentro del segundo
+    var textUpperCase = text.toUpperCase()
+    var baseTextUpperCase = baseText.toUpperCase()
+    if (baseTextUpperCase.indexOf(textUpperCase) !== -1) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    return false
+  }
+}
