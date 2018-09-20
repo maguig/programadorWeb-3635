@@ -49,6 +49,8 @@ searchStudentButtonNode.onclick =  searchStudent
 
 function serchStudent(event) {
   var searchTextNode = document.getElementById('searchText')
+
+
 }
 //falta terminar la busqueda
 
@@ -255,5 +257,5 @@ function includesText (text, baseText) {
     }
   } else {
     return false
-  }
+  }             // Desafio clase 6
 }

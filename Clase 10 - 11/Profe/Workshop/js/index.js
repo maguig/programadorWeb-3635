@@ -11,7 +11,7 @@ var studentsList = getLocalList(LOCAL_KEY);
  HEAD
 var mainListNode = document.getElementById('mainList');
 
-console.log(studentsList)
+console.log('Fuente de verdad inicial ', studentsList)
 
 var mainListNode = document.getElementById('mainList')
 
@@ -30,9 +30,19 @@ var firstNameNode = document.getElementById('firstName');
 
 firstNameNode.onblur = validateRequiredField
 
+<<<<<<< HEAD
 var dniNode = document.getElementById('dni');
+=======
+var lastNameNode = document.getElementById('lastName')
+
+var dniNode = document.getElementById('dni')
+>>>>>>> 9aba80085ce68b2f416d652c3462b35b2d9dd958
 
 dniNode.onblur = validateDniField
+
+var emailNode = document.getElementById('email')
+
+emailNode.onblur = validateEmailField
 
 // Agregar el estudiante
 
@@ -83,16 +93,20 @@ function deleteStudent () {
   deleteDniNode.value = ''
   deleteStudentButtonNode.disabled = true
 
-  console.log(studentsList)
+  console.log('Fuente de verdad luego de eliminar ', studentsList)
 }
 
 function addStudent () {
   var firstNameValue = firstNameNode.value
   var dniValue = dniNode.value
+  var lastNameValue = lastNameNode.value
+  var emailValue = emailNode.value
 
   var student = {
     firstName: firstNameValue,
-    dni: dniValue
+    dni: dniValue,
+    lastName: lastNameValue,
+    email: emailValue
   }
 
   studentsList.push(student)
@@ -103,13 +117,17 @@ function addStudent () {
 
   mainListNode.appendChild(studentNode)
 
-  firstName.value = ''
+  firstNameNode.value = ''
   dniNode.value = ''
+  lastNameNode.value = ''
+  emailNode.value = ''
   addStudentButtonNode.disabled = true
-  firstName.classList.remove('is-valid')
+  firstNameNode.classList.remove('is-valid')
   dniNode.classList.remove('is-valid')
+  lastNameNode.classList.remove('is-valid')
+  emailNode.classList.remove('is-valid')
 
-  console.log(studentsList)
+  console.log('Fuente de verdad luego de agregar ', studentsList)
 }
 
 // Funciones auxiliares
@@ -158,12 +176,35 @@ function validateRequiredField (event) {
   validateSubmitButton()
 }
 
+function validateEmailField (event) {
+  var inputNode = event.target
+
+  if (
+    !inputNode.value ||
+    inputNode.value.indexOf('@') === -1 ||
+    inputNode.value.indexOf('.') === -1
+  ) {
+    inputNode.classList.remove('is-valid')
+    inputNode.classList.add('is-invalid')
+  } else {
+    inputNode.classList.remove('is-invalid')
+    inputNode.classList.add('is-valid')
+  }
+
+  validateSubmitButton()
+}
+
 function validateSubmitButton () {
   var addStudentButtonNode = document.getElementById('addStudentButton');
   var inputFields = document.getElementsByClassName('is-invalid');
 
+<<<<<<< HEAD
   if (inputFields.length > 0) {
     addStudentButtonNode.disabled = true;
+=======
+  if (inputFields.length === 3) {
+    addStudentButtonNode.disabled = false
+>>>>>>> 9aba80085ce68b2f416d652c3462b35b2d9dd958
   } else {
     addStudentButtonNode.disabled = false;
   }
@@ -222,6 +263,29 @@ function getLocalList (key) {
   }
   
 
+}
+
+// Busco cuando el usuario aprieta el botón
+
+var searchStudentButtonNode = document.getElementById('searchStudentButton')
+
+searchStudentButtonNode.onclick = searchStudent
+
+function searchStudent (event) {
+  var searchTextNode = document.getElementById('searchText')
+  var searchListNode = document.getElementById('searchList')
+
+  var index = searchStudentIndexByText(searchTextNode.value, studentsList)
+
+  var student = studentsList[index]
+
+  searchListNode.innerHTML = ''
+
+  if (student) {
+    var studentNode = createStudentNode(student)
+
+    searchListNode.appendChild(studentNode)
+  }
 }
 
 // Buscar estudiante con coincidencias parciales
