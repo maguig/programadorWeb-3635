@@ -30,13 +30,13 @@ var firstNameNode = document.getElementById('firstName');
 
 firstNameNode.onblur = validateRequiredField
 
-<<<<<<< HEAD
+
 var dniNode = document.getElementById('dni');
-=======
+
 var lastNameNode = document.getElementById('lastName')
 
 var dniNode = document.getElementById('dni')
->>>>>>> 9aba80085ce68b2f416d652c3462b35b2d9dd958
+
 
 dniNode.onblur = validateDniField
 
@@ -198,13 +198,13 @@ function validateSubmitButton () {
   var addStudentButtonNode = document.getElementById('addStudentButton');
   var inputFields = document.getElementsByClassName('is-invalid');
 
-<<<<<<< HEAD
+
   if (inputFields.length > 0) {
     addStudentButtonNode.disabled = true;
-=======
+
   if (inputFields.length === 3) {
     addStudentButtonNode.disabled = false
->>>>>>> 9aba80085ce68b2f416d652c3462b35b2d9dd958
+
   } else {
     addStudentButtonNode.disabled = false;
   }
@@ -322,3 +322,4 @@ function includesText (text, baseText) {
   }
 }
 
+}
