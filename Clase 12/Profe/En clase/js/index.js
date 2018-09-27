@@ -74,7 +74,7 @@ console.log('Init app')
 //   var value = inputNode.val()
 
 //   if (value) {
-//     // inputNode.classList.add('is-valid')
+//     inputNode.classList.add('is-valid')
 //     inputNode.addClass('is-valid')
 //     inputNode.removeClass('is-invalid')
 //   } else {
@@ -83,12 +83,12 @@ console.log('Init app')
 //   }
 // }
 
-var divNode = $('div')
+// var divNode = $('div')
 
-divNode.click(toggleRed)
+// divNode.click(toggleRed)
 
-function toggleRed () {
-  var divNode = $(this)
+// function toggleRed () {
+//   var divNode = $(this)
 
-  divNode.toggleClass('red')
-}
+//   divNode.toggleClass('red')
+// }

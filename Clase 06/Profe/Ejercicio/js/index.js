@@ -31,7 +31,7 @@ var students = [
 function deleteElement (index, elements) {
   if (Array.isArray(elements)) {
     var elementsCopy = elements.slice()
-    elementsCopy.splice(index, 1)
+    elementsCopy.splice(index, 2)
     return elementsCopy
   } else {
     return elements
