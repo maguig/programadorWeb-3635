@@ -87,8 +87,24 @@ console.log('Init app')
 
 // divNode.click(toggleRed)
 
+<<<<<<< HEAD
 // function toggleRed () {
 //   var divNode = $(this)
 
 //   divNode.toggleClass('red')
 // }
+=======
+var player = true
+
+function toggleRed () {
+  // var divNode = $(this)
+  // divNode.toggleClass('red')
+  if (player) {
+    console.log('Cruz')
+    player = false
+  } else {
+    console.log('Círculo')
+    player = true
+  }
+}
+>>>>>>> c9a578fb18ad6fc6457a3f148f772ea0d60c1615
