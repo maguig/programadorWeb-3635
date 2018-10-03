@@ -1,6 +1,6 @@
 $(document).ready(function () {
   console.log('Init HP app')
-
+})
   // - 15.1 Efectos y animaciones
   //  - `.show()`
 
@@ -51,4 +51,4 @@ $(document).ready(function () {
     //   $('#cover6').slideDown(2000, function () {})
     // }
   )
-})
+
