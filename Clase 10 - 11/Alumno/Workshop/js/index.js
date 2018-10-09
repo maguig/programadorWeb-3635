@@ -49,10 +49,7 @@ searchStudentButtonNode.onclick =  searchStudent
 
 function serchStudent(event) {
   var searchTextNode = document.getElementById('searchText')
-
-
 }
-//falta terminar la busqueda
 
 function validateDeleteDniField (event) {
   var inputNode = event.target
@@ -61,10 +58,10 @@ function validateDeleteDniField (event) {
 
   console.log(index)
   if (index > -1) {
-    // Habilitamos el botón
+    
     deleteStudentButtonNode.disabled = false
   } else {
-    // Deshabilitar el botón
+    
     deleteStudentButtonNode.disabled = true
   }
 }
@@ -74,13 +71,13 @@ function deleteStudent () {
 
   var index = searchStudentIndexByDni(deleteDniValue, studentsList)
 
-  // Elimino en la fuente de verdad
+  
   studentsList.splice(index, 1)
 
-  // Piso la lista del localStorage
+  
   setLocalList(LOCAL_KEY, studentsList)
 
-  // Busco en el dom el nodo y lo elimino de la lista
+
   var node = document.getElementById(deleteDniValue)
 
   mainListNode.removeChild(node)
@@ -245,9 +242,9 @@ function searchStudentIndexByText (text, studentsList) {
 }
 
 function includesText (text, baseText) {
-  // Valido que ambos parámetros sean string
+  
   if (typeof text === 'string' && typeof baseText === 'string') {
-    // Verifico si el primer parámetro se encuentra dentro del segundo
+    
     var textUpperCase = text.toUpperCase()
     var baseTextUpperCase = baseText.toUpperCase()
     if (baseTextUpperCase.indexOf(textUpperCase) !== -1) {
