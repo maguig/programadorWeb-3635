@@ -1,5 +1,7 @@
 import crossroads from 'crossroads'
 
+import homecontroller from './controllers/homecontrollers'
+
 crossroads.addRoute('/', function () {
   $('#root').load('./partials/home.html', function () {
     console.log('Se cargo la home')
