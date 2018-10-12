@@ -2,11 +2,13 @@ import crossroads from 'crossroads'
 
 import homeController from './controllers/homeController'
 
+import peopleController from './controllers/peopleController'
+
 crossroads.addRoute('/', function () {
   $('#root').load('./partials/home.html',homeController)
 })
 
-import peopleController from './controllers/peopleController'
+
 
 crossroads.addRoute('#/people', function () {
   $('#root').load('./partials/people.html',peopleController) 
