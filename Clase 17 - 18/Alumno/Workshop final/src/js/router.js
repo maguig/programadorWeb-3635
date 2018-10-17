@@ -16,7 +16,7 @@ crossroads.addRoute('#/people', function () {
 })
 
 crossroads.addRoute('#/local-storage', function () {
-  console.log('LS page')
+  $('#root').load('./partials/local-storage.html',localStorageController)
 })
 
 import contacController from './controllers/contacController'

@@ -1,7 +1,13 @@
+import { getLocalList, setLocalList } from '../utils/localStorage'
+import { genderTranslate, eyeTranslate } from '../utils/translates'
+import {searchPeopletIndexByUrl  } from '../utils/search'
 import { getData } from '../utils/ajax';
 
 function peopleController() {
-	console.log('Se cargo la people ctrl 2');
+	console.log('Se cargo la people ');
+
+	var apiResults = []
+	var localPeople = getLocalList('peopleList')
 
 	var tableBodyNode = $('#tableBody');
 
@@ -16,23 +22,65 @@ function peopleController() {
 			console.log('Ok los vehiculos son:', data);
 			var people = data.results;
 
+			if (data.results) {
+				apiResults = apiResults.concat(data.results)
+			}
+
 			var person;
 
 			for (var i = 0; i < people.length; i++) {
 				person = people[i];
 
 				var url = person.url;
+				var localIndex = searchPeopletIndexByUrl(person.url, localPeople)
 
 				url = url.replace('https://swapi.co/api/people/', '');
 
 				var id = url.replace('/', '');
 
-				console.log(person);
+				var addButton
+console.log(localIndex)
+				if(localIndex === -1){
+					addButton = 
+
+					'<button id="button' +
+
+					id +
+					'"<button id= type="button" class="btn btn-successs">guardar</button>'
+				} else {
+
+					addButton = ''
+
+				}
 
 				tableBodyNode.append(
-					'<tr id="' + id +	'"><th scope="row">' +	id +	'</th><td>' +	person.name +	'</td><td>' +	genderTranslate +	person.gender +	'</td><td>' +	person.height +	' cm</td><td>' +	person.mass +'</td><td>' +	person.eye_color +	' <button type="button" class="btn btn-success"> Success </button> '
+					'<tr id="' + id +	'"><th scope="row">' +	id +	'</th><td>' +	person.name +	'</td><td>' +	genderTranslate(person.gender) +	'</td><td>' +	
+					person.height +	' cm</td><td>' +	person.mass +'</td><td>' +	eyeTranslate('ES', person.eye_color) + '</td><td>'+addButton+'</td></tr>'
 				);
-			}
+
+				$('#button' + id).click(function () {
+					var button = $(this)
+
+					var buttonId = button.attr('id')
+
+					var id = buttonId.replace('button', '')
+
+					var newUrl = 'https://swapi.co/api/people/' + id +'/'
+
+					var index = searchPeopletIndexByUrl(newUrl, apiResults)
+
+					if(index !== -1) {
+						var personInfo = apiResults[index]
+
+						localPeople.push(personInfo)
+
+						button.remove()
+						setLocalList('peopleList',localPeople)
+
+						console.log(personInfo)
+					}
+				})
+			
 			if (data.next) {
 				seeMoreButton.one('click', function() {
 					getData(data.next, showPeople);
@@ -41,51 +89,14 @@ function peopleController() {
 				seeMoreButton.remove();
 			}
 		}
+		}
 	}
 }
 
-function genderTranslate(gender) {
-	switch (gender) {
-		case 'male':
-			return 'masculino';
-			break;
+export default peopleController
 
-		case 'female':
-			return 'femenino';
-			break;
 
-		case 'n/a':
-			return 'n/a';
-			break;
+  
 
-		default:
-			return gender;
-			break;
-	}
-}
 
-var TRANSLATES = {
-	ES: {
-		blue: 'azules',
-		yellow: 'amarillos',
-		red: 'rojos'
-	},
 
-	EN: {
-		blue: 'blue',
-		yellow: 'yellow',
-		red: 'red'
-	},
-
-	PT: {
-		blue: 'azulsiño',
-		yellow: 'amarilliño',
-		red: 'rojiño'
-	}
-};
-
-function eyeTranslate(leng, eyeColor) {
-	return TRANSLATES[lang][eyeColor] || eyeColor;
-}
-
-export default peopleController;
