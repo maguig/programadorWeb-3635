@@ -1,5 +1,5 @@
 function homeController () {
-    console.log('Se cargo la home ctrl')
+    console.log('Se cargo el controllers de la Home')
   }
 
   export default homeController

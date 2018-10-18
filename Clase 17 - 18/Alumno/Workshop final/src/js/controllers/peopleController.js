@@ -1,13 +1,17 @@
-import { getLocalList, setLocalList } from '../utils/localStorage'
-import { genderTranslate, eyeTranslate } from '../utils/translates'
-import {searchPeopletIndexByUrl  } from '../utils/search'
+import { getLocalList, setLocalList } from '../utils/localStorage';
+
+import { genderTranslate, eyeTranslate } from '../utils/translates';
+
+import { searchPeopletIndexByUrl } from '../utils/search';
+
 import { getData } from '../utils/ajax';
 
 function peopleController() {
 	console.log('Se cargo la people ');
 
-	var apiResults = []
-	var localPeople = getLocalList('peopleList')
+	var apiResults = [];
+
+	var localPeople = getLocalList('peopleList');
 
 	var tableBodyNode = $('#tableBody');
 
@@ -23,7 +27,7 @@ function peopleController() {
 			var people = data.results;
 
 			if (data.results) {
-				apiResults = apiResults.concat(data.results)
+				apiResults = apiResults.concat(data.results);
 			}
 
 			var person;
@@ -31,72 +35,73 @@ function peopleController() {
 			for (var i = 0; i < people.length; i++) {
 				person = people[i];
 
+				var localIndex = searchPeopletIndexByUrl(person.url, localPeople);
+
 				var url = person.url;
-				var localIndex = searchPeopletIndexByUrl(person.url, localPeople)
 
 				url = url.replace('https://swapi.co/api/people/', '');
 
 				var id = url.replace('/', '');
 
-				var addButton
-console.log(localIndex)
-				if(localIndex === -1){
-					addButton = 
+				var addButton;
 
-					'<button id="button' +
-
-					id +
-					'"<button id= type="button" class="btn btn-successs">guardar</button>'
+				if (localIndex === -1) {
+					addButton = '<button id="button' + id + '" type="button" class="btn btn-success">Guardar</button>';
 				} else {
-
-					addButton = ''
-
+					addButton = '';
 				}
 
 				tableBodyNode.append(
-					'<tr id="' + id +	'"><th scope="row">' +	id +	'</th><td>' +	person.name +	'</td><td>' +	genderTranslate(person.gender) +	'</td><td>' +	
-					person.height +	' cm</td><td>' +	person.mass +'</td><td>' +	eyeTranslate('ES', person.eye_color) + '</td><td>'+addButton+'</td></tr>'
-				);
+					'<tr id="' +
+						id +
+						'"><th scope="row">' +
+						id +
+						'</th><td>' +
+						person.name +
+						'</td><td>' +
+						genderTranslate(person.gender) +
+						'</td><td>' +
+						person.height +
+						' cm</td><td>' +
+						person.mass +
+						' kg</td><td>' +
+						eyeTranslate('PT', person.eye_color) +
+						'</td><td>' +
+						addButton +
+						'</td></tr>'
+				),
+					$('#button' + id).click(function() {
+						var button = $(this);
 
-				$('#button' + id).click(function () {
-					var button = $(this)
+						var buttonId = button.attr('id');
 
-					var buttonId = button.attr('id')
+						var id = buttonId.replace('button', '');
 
-					var id = buttonId.replace('button', '')
+						var newUrl = 'https://swapi.co/api/people/' + id + '/';
 
-					var newUrl = 'https://swapi.co/api/people/' + id +'/'
+						var index = searchPeopletIndexByUrl(newUrl, apiResults);
 
-					var index = searchPeopletIndexByUrl(newUrl, apiResults)
+						if (index !== -1) {
+							var personInfo = apiResults[index];
 
-					if(index !== -1) {
-						var personInfo = apiResults[index]
+							localPeople.push(personInfo);
 
-						localPeople.push(personInfo)
+							setLocalList('peopleList', localPeople);
 
-						button.remove()
-						setLocalList('peopleList',localPeople)
+							button.remove();
+						}
+					});
 
-						console.log(personInfo)
-					}
-				})
-			
-			if (data.next) {
-				seeMoreButton.one('click', function() {
-					getData(data.next, showPeople);
-				});
-			} else {
-				seeMoreButton.remove();
+				if (data.next) {
+					seeMoreButton.one('click', function() {
+						getData(data.next, showPeople);
+					});
+				} else {
+					seeMoreButton.remove();
+				}
 			}
-		}
 		}
 	}
 }
 
-export default peopleController
-
-
-  
-
-
-
+export default peopleController;

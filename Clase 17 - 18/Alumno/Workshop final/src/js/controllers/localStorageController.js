@@ -1,35 +1,50 @@
 
 import { getLocalList, setLocalList } from '../utils/localStorage'
-import { genderTranslate, eyeTranslate } from '../utils/translates'
 
-import { getData } from '../utils/ajax';
+import { genderTranslate, eyeTranslate } from '../utils/translates'
 
 import {searchPeopletIndexByUrl  } from '../utils/search'
 
-
-import { getLocalList, setLocalList } from '../utils/localStorage'
-
 function localStorageController() {
-  console.log('se carga el controllers ls')
+  console.log('se carga el controllers LS')
 
-  var localPeople = getLocalList('')
+  var localPeople = getLocalList('peopleList')
 
+  var tableBodyNode = $('#tableBody')
 
+  var person
 
-  for (var i = 0; i < people.length; i++) {
-    person = people[i];
+  for (var i = 0; i < localPeople.length; i++) {
+    person = localPeople[i];
+
+    var url = person.url
+
+    url = url.replace('https://swapi.co/api/people/', '')
+
+    var id = url.replace('/', '')
+
 
     tableBodyNode.append(
-      '<tr id="' + id + '"><th scope="row">' + id + '</th><td>' + person.name + '</td><td>' + genderTranslate(person.gender) + '</td><td>' +
-      person.height + ' cm</td><td>' + person.mass + '</td><td>' + eyeTranslate('ES', person.eye_color) + '<button id="button' +
-
+      '<tr id="' +
       id +
-      '"<button id= type="button" class="btn btn-successs">guardar</button></td></tr>'
+      '"><th scope="row">' +
+      id +
+      '</th><td>' +
+      person.name +
+      '</td><td>' +
+      genderTranslate(person.gender) +
+      '</td><td>' +
+      person.height +
+      ' cm</td><td>' +
+      person.mass +
+      ' kg</td><td>' +
+      eyeTranslate('PT', person.eye_color) +
+      '</td><td><button id="button' +
+      id +
+      '" type="button" class="btn btn-danger">Eliminar</button></td></tr>'
+  )
 
-    );
-  }
 
-}
 $('#button' + id).click(function () {
   var button = $(this)
 
@@ -49,7 +64,8 @@ $('#button' + id).click(function () {
     button.parent().parent().remove()
 
   }
-
 })
+}
+}
 
 export default localStorageController
