@@ -45,14 +45,17 @@ deleteStudentButtonNode.onclick = deleteStudent
 
 var searchStudentButtonNode = document.getElementById('searchStudentButton')
 
-searchStudentButtonNode.onclick =  searchStudent
-
-function serchStudent(event) {
+searchStudentButtonNode.onclick =  function serchStudent(event) {
   var searchTextNode = document.getElementById('searchText');
 
   var studentIndex = searchStudentIndexByText(searchTextNode.value, studentsList);
   student = studentsList[studentIndex];
+  
+  var studentNode = createStudentNode(student);
 
+
+  var searchList = document.getElementById('searchList');
+  searchList.appendChild(studentNode);
   
 }
 
@@ -230,6 +233,7 @@ function getLocalList (key) {
 }
 
 
+
 function searchStudentIndexByText (text, studentsList) {
   var student
 
@@ -259,6 +263,6 @@ function includesText (text, baseText) {
     }
   } else {
     return false
-  }             // Desafio clase 6
+  }
 }
 
